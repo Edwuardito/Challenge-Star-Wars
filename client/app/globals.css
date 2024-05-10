@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-gradient-circle{
+  background-image: url('../public/background.png');
+  background-repeat: no-repeat;
+  background-size:cover;
+}

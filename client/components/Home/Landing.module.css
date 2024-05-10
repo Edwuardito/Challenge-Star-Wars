@@ -1,0 +1,14 @@
+.bg_config{
+    width: 20rem;
+    height: 25rem;
+    margin-top: 2.5rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+}
+.bg_peliculas{
+    background-image: url('../../public/peliculas.jpg');
+}
+.bg_personajes{
+    background-image: url('../../public/Character.jpg');
+}
