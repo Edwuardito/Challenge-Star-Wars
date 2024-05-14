@@ -22,6 +22,26 @@ export async function fetchpelicula(id:any) {
         console.log(error)
     }
 }
+export async function fetchAllPersonajes() {
+    try {
+        let data:any = []
+        let acc = 1
+        let next = ''
+        const res = await fetch(`https://swapi.dev/api/people/?page=${acc}`)
+        const json = await res.json()
+        next = json.next
+        data = [...data,json.results]
+        while(next){
+            const res = await fetch(`https://swapi.dev/api/people/?page=${acc++}`)
+            const json = await res.json()
+            next = json.next
+            data = [...data,json.results]
+        }
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
 export  function parseNumber(id:any) {
     return id == '1' ? 'I': id == '2'? 'II':id == '3'? 'III':id == '4'? 'IV':id == '5'? 'V':'VI'
 }

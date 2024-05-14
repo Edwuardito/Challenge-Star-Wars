@@ -19,11 +19,12 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${inter.className} h-screen bg-gradient-circle flex flex-col items-center`}>
         <div className="container">
-          <Link href={'/'}>
-            <img className="mx-auto md:mx-5 cursor-pointer" src={'/logo.png'} width={120} height={100} alt='logo'/>
-          </Link>
-          <img className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] hidden lg:block xl:w-96 lg:w-48"  src={'/vader.png'} width={400} height={400} alt='bg-vader'/>
-        {children}
+          <div className="flex w-full">
+            <Link href={'/'} className="mx-auto sm:mx-0">
+              <img className="md:mx-5 cursor-pointer" src={'/logo.png'} width={120} height={100} alt='logo'/>
+            </Link>
+          </div>
+          {children}
         </div>
       </body>
     </html>

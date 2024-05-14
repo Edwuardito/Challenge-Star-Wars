@@ -1,0 +1,7 @@
+.bg_robot{
+    width: 180px;
+    height: 220px;
+    background-image: url('../../public/robot.jpg');
+    background-position: center;
+    background-size:cover;
+  }

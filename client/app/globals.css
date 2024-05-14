@@ -7,3 +7,10 @@
   background-position: center;
   background-size:cover;
 }
+.bg_vader{
+  width: 400px;
+  height: 400px;
+  background-image: url('../public/vader.png');
+  background-position: center;
+  background-size:cover;
+}

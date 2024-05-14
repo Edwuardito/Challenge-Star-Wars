@@ -1,0 +1,13 @@
+.bg_personajes{
+    background-image: url('../../../public/robot.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+    width: 150px;
+    height: 200px;
+}
+.hidescrollbar::-webkit-scrollbar{
+    display: none;
+}
+
