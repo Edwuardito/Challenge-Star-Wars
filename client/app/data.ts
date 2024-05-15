@@ -32,7 +32,8 @@ export async function fetchAllPersonajes() {
         next = json.next
         data = [...data,json.results]
         while(next){
-            const res = await fetch(`https://swapi.dev/api/people/?page=${acc++}`)
+            const res = await fetch(`https://swapi.dev/api/people/?page=${acc + 1}`)
+            acc = acc + 1
             const json = await res.json()
             next = json.next
             data = [...data,json.results]
