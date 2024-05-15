@@ -1,0 +1,5 @@
+.bg_luke{
+    background-image: url('../../../public/luke.jpg');
+    background-position: center;
+    background-size:cover;
+}
