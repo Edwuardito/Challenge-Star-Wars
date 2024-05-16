@@ -1,7 +1,8 @@
+import Image from "next/image"
 export default function Loader() {
     return (
         <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] xl:w-96 lg:w-48 z-0">
-            <img
+            <Image
                 src={'/vader.png'}
                 width={400}
                 height={400}

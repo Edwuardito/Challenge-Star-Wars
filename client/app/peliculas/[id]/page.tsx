@@ -60,12 +60,14 @@ export default function Page() {
                     <div className={`flex overflow-x-scroll overflow-y-hidden mt-8 ${styles.hidescrollbar}`}>
                          {
                               personajes?.map((el:any,index) => (
-                                   <Link href={`/personajes/${el.url.split('/')[el.url.split('/').length - 2]}`}>
-                                        <div className="mx-4 w-36 h-56" key={index}>
-                                             <div className={styles.bg_personajes}/>
-                                             <p className="text-white text-center">{el.name}</p>
-                                        </div>
-                                   </Link>
+                                   <div key={index}>
+                                        <Link href={`/personajes/${el.url.split('/')[el.url.split('/').length - 2]}`}>
+                                             <div className="mx-4 w-36 h-56">
+                                                  <div className={styles.bg_personajes}/>
+                                                  <p className="text-white text-center">{el.name}</p>
+                                             </div>
+                                        </Link>
+                                   </div>
                               ))
                          }
                     </div>

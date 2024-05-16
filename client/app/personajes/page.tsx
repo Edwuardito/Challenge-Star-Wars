@@ -6,10 +6,10 @@ import Link from 'next/link'
 import Loader from '../components/Loader'
 
 export default function Page () {
-    let storeData:any = localStorage.getItem('data')
-    if (typeof storeData === 'string') {
-        storeData = JSON.parse(storeData)
-    }
+    const [storeDataState,setStoreDataState] = useState({
+        ojos:[],
+        personajes:[]
+    })
     const [personajesFiltrados,setPersonajesFiltrados] = useState([])
     const [personajesFiltradosParaMostrar,setPersonajesFiltradosParaMostar] = useState([])
     const [personajes,setPersonajes] = useState([])
@@ -34,7 +34,7 @@ export default function Page () {
             if(page !== 1){
                 setPersonajesParaMostrar(personajes.flat().slice((page - 1) * 10, (page - 1) * 10 + 10))
             }else{
-                setPersonajesParaMostrar(storeData.personajes.slice(0,10))
+                setPersonajesParaMostrar(storeDataState.personajes.slice(0,10))
             }
 
         }
@@ -52,8 +52,13 @@ export default function Page () {
         else setPersonajesFiltradosParaMostar(personajesFiltrados)
     }
     useEffect(() => {
+        let storeData:any = localStorage.getItem('data')
+        if (typeof storeData === 'string') {
+            storeData = JSON.parse(storeData)
+            setStoreDataState(storeData)
+        }
         const getdata = async () => {
-            if(!storeData){
+            if(!storeDataState.ojos.length){
                 const todosLosPersonajes = await fetchAllPersonajes()
                 const obtenerColoresDeOjos = todosLosPersonajes.flat().map((el:any) => {
                     if(el.eye_color !== 'unknown') {
@@ -70,8 +75,8 @@ export default function Page () {
             }
             else {
                 getPage()
-                personajes && setPersonajes(storeData.personajes)
-                eyesColor && setEyesColor(storeData.ojos)
+                personajes && setPersonajes(storeDataState.personajes)
+                eyesColor && setEyesColor(storeDataState.ojos)
             }
         }
         getdata()
@@ -93,7 +98,7 @@ export default function Page () {
     return (
         <div>
             {
-                personajesFiltrados || personajes && eyesColor ?
+                personajesFiltrados.length || personajes.length && eyesColor.length ?
                 <div className='xl:flex'>
                     <div className='xl:w-72 flex items-start justify-center mt-8'>
                         <div className='xl:w-72 flex flex-col justify-center items-center mb-8 xl:mb-0'>
@@ -125,25 +130,29 @@ export default function Page () {
                             {   
                                 personajesFiltradosParaMostrar.length && filters.length?
                                 personajesFiltradosParaMostrar.map((el:any,index:number)=> (
-                                    <Link href={`personajes/${el.url.split('/')[el.url.split('/').length - 2]}`}>
-                                        <div key={index} className={`rounded ${styles.bg_robot} w-[250px] h-[300px] xs:w-[180px] xs:h-[220px] flex items-end`}>
-                                            <div className='m-1'>
-                                                <p className='text-white font-bold'>{el.name}</p>
-                                                <p className='text-slate-50 text-[0.7rem]'>{`${el.eye_color} eye and ${el.gender} gender `}</p>
+                                    <div key={index}>
+                                        <Link href={`personajes/${el.url.split('/')[el.url.split('/').length - 2]}`}>
+                                            <div  className={`rounded ${styles.bg_robot} w-[250px] h-[300px] xs:w-[180px] xs:h-[220px] flex items-end`}>
+                                                <div className='m-1'>
+                                                    <p className='text-white font-bold'>{el.name}</p>
+                                                    <p className='text-slate-50 text-[0.7rem]'>{`${el.eye_color} eye and ${el.gender} gender `}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
+                                        </Link>
+                                    </div>
                                 ))
                                 :
                                 !filters.length? personajesParaMostrar.map((el:any,index:number)=> (
-                                    <Link href={`personajes/${el.url.split('/')[el.url.split('/').length - 2]}`}>
-                                        <div key={index} className={`rounded ${styles.bg_robot} w-[250px] h-[300px] xs:w-[180px] xs:h-[220px] flex items-end`}>
-                                            <div className='m-1'>
-                                                <p className='text-white font-bold'>{el.name}</p>
-                                                <p className='text-slate-50 text-[0.7rem]'>{`${el.eye_color} eye and ${el.gender} gender `}</p>
+                                    <div key={index}>
+                                        <Link href={`personajes/${el.url.split('/')[el.url.split('/').length - 2]}`}>
+                                            <div  className={`rounded ${styles.bg_robot} w-[250px] h-[300px] xs:w-[180px] xs:h-[220px] flex items-end`}>
+                                                <div className='m-1'>
+                                                    <p className='text-white font-bold'>{el.name}</p>
+                                                    <p className='text-slate-50 text-[0.7rem]'>{`${el.eye_color} eye and ${el.gender} gender `}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
+                                        </Link>
+                                    </div>
                                 )):<p className='text-white text-xs md:text-xl'>No hay personajes con las caracteristicas que buscas</p>
                                 
                             }
